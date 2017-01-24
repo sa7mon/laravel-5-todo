@@ -18,10 +18,10 @@ Route::get('/', function () {
 Route::model('tasks', 'Task');
 Route::model('projects', 'Project');
 
-Route::bind('tasks', function($value, $route) {
+Route::bind('task', function($value, $route) {
     return App\Task::whereSlug($value)->first();
 });
-Route::bind('projects', function($value, $route) {
+Route::bind('project', function($value, $route) {
     return App\Project::whereSlug($value)->first();
 });
 
