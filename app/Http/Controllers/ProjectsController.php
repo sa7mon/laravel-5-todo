@@ -2,15 +2,17 @@
 
 use App\Project;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
-//use Input;
-//use Redirect;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
 class ProjectsController extends Controller {
+
+    protected $rules = [
+        'name' => ['required', 'min:3'],
+        'slug' => ['required'],
+    ];
 
     /**
      * Display a listing of the resource.
@@ -36,10 +38,13 @@ class ProjectsController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
+     * @param \Illuminate\Http\Request $request
      * @return Response
      */
-    public function store()
+    public function store(Request $request)
     {
+        $this->validate($request, $this->rules);
+
         $input = Input::all();
         Project::create( $input );
 
@@ -71,11 +76,14 @@ class ProjectsController extends Controller {
     /**
      * Update the specified resource in storage.
      *
+     * @param \Illuminate\Http\Request $request
      * @param  \App\Project $project
      * @return Response
      */
-    public function update(Project $project)
+    public function update(Project $project, Request $request)
     {
+        $this->validate($request, $this->rules);
+
         $input = array_except(Input::all(), '_method');
         $project->update($input);
 

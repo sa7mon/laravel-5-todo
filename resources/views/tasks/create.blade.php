@@ -5,6 +5,7 @@
  * Date: 1/23/17
  * Time: 19:05
  */
+?>
 
 @extends('app')
 

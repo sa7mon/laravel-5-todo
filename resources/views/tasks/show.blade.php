@@ -5,6 +5,7 @@
  * Date: 1/23/17
  * Time: 17:11
  */
+?>
 
 @extends('app')
 
@@ -16,7 +17,7 @@
     @else
         <ul>
             @foreach( $project->tasks as $task )
-                <li><a href="{{ route('projects.tasks.show', [$project->slug, $task->slug]) }}">{{ $task->name }}</a></li>
+                <li><a href="{{ route('projects.tasks.show', [$project->slug, $task->slug]) }}">{{ $task-> }}</a></li>
             @endforeach
         </ul>
     @endif

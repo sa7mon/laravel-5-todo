@@ -14,20 +14,22 @@
     @if ( !$project->tasks->count() )
         Your project has no tasks.
     @else
-        <ul>
-            @foreach( $project->tasks as $task )
-                <li>
-                    {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('projects.tasks.destroy', $project->slug, $task->slug))) !!}
-                    <a href="{{ route('projects.tasks.show', [$project->slug, $task->slug]) }}">{{ $task->name }}</a>
-                    (
-                    {!! link_to_route('projects.tasks.edit', 'Edit', array($project->slug, $task->slug), array('class' => 'btn btn-info')) !!},
 
-                    {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
-                    )
-                    {!! Form::close() !!}
-                </li>
+            @foreach( $project->tasks as $task )
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            {!! Form::open(array('class' => 'form-inline', 'method' => 'DELETE', 'route' => array('projects.tasks.destroy', $project->slug, $task->slug))) !!}
+                            <a href="{{ route('projects.tasks.show', [$project->slug, $task->slug]) }}">{{ $task->name }}</a>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        {!! link_to_route('projects.tasks.edit', 'Edit', array($project->slug, $task->slug), array('class' => 'btn btn-info')) !!},
+                        {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
+                        {!! Form::close() !!}
+                    </div>
+                </div>
             @endforeach
-        </ul>
     @endif
 
     <p>
